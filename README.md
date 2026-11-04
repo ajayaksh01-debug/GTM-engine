@@ -28,3 +28,15 @@ npm run dev
 
 Gmail live sync is not wired up yet — see `Notes` in the app for current
 status.
+
+## Deploying (Cloudflare Workers)
+
+```bash
+npm run cf:build
+npx wrangler secret put AIRTABLE_API_KEY
+npm run cf:deploy
+```
+
+`AIRTABLE_BASE_ID` is non-secret and already set in `wrangler.jsonc`'s vars
+if needed — the current base ID is hardcoded as a fallback in
+`lib/airtable.ts`.
