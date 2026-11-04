@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { addInteraction, listInteractions } from "@/lib/airtable";
+import { addInteraction, listInteractions, type Interaction } from "@/lib/airtable";
 
 export async function GET(
   _req: NextRequest,
@@ -23,8 +23,8 @@ export async function POST(
 ) {
   try {
     const { id } = await params;
-    const body = await req.json();
-    const interaction = await addInteraction({ leadId: id, ...body });
+    const body = (await req.json()) as Omit<Parameters<typeof addInteraction>[0], "leadId">;
+    const interaction: Interaction = await addInteraction({ leadId: id, ...body });
     return NextResponse.json({ interaction }, { status: 201 });
   } catch (err) {
     return NextResponse.json(

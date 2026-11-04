@@ -27,8 +27,8 @@ export default function LeadsTable() {
   useEffect(() => {
     fetch("/api/leads")
       .then(async (res) => {
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error ?? "Failed to load leads");
+        const data = (await res.json()) as { leads?: Lead[]; error?: string };
+        if (!res.ok || !data.leads) throw new Error(data.error ?? "Failed to load leads");
         setLeads(data.leads);
       })
       .catch((err) => setError(err.message));

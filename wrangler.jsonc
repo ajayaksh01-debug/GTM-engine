@@ -8,6 +8,15 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
+  "kv_namespaces": [
+    {
+      "binding": "GTM_TOKENS",
+      "id": "96993adb1c524a119c58ee5ef017bfc5"
+    }
+  ],
+  "vars": {
+    "APP_URL": "https://gtm-engine.ajay-singh-086.workers.dev"
+  },
   "observability": {
     "enabled": true
   }

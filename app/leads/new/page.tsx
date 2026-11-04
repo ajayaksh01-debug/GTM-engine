@@ -30,8 +30,8 @@ export default function NewLeadPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Failed to create lead");
+      const data = (await res.json()) as { lead?: { id: string }; error?: string };
+      if (!res.ok || !data.lead) throw new Error(data.error ?? "Failed to create lead");
       router.push(`/leads/${data.lead.id}`);
     } catch (err) {
       setError((err as Error).message);

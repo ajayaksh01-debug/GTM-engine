@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getLead, updateLead } from "@/lib/airtable";
+import { getLead, updateLead, type Lead } from "@/lib/airtable";
 
 export async function GET(
   _req: NextRequest,
@@ -23,7 +23,7 @@ export async function PATCH(
 ) {
   try {
     const { id } = await params;
-    const body = await req.json();
+    const body = (await req.json()) as Partial<Omit<Lead, "id">>;
     const lead = await updateLead(id, body);
     return NextResponse.json({ lead });
   } catch (err) {
